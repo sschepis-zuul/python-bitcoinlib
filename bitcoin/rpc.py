@@ -37,7 +37,7 @@ import json
 import os
 import platform
 import sys
-from retrying import retry
+
 try:
     import urllib.parse as urlparse
 except ImportError:
@@ -185,12 +185,10 @@ class BaseProxy(object):
         self.__conn = httplib.HTTPConnection(self.__url.hostname, port=port,
                                              timeout=timeout)
 
-    def retry_if_io_error(exception):
-        return isinstance(exception,IOError)
 
-    @retry(retry_on_exception=retry_if_io_error)
     def _call(self, service_name, *args):
         self.__id_count += 1
+        self.__conn.close()
 
         postdata = json.dumps({'version': '1.1',
                                'method': service_name,
@@ -211,7 +209,6 @@ class BaseProxy(object):
         else:
             return response['result']
 
-    @retry(retry_on_exception=retry_if_io_error)
     def _batch(self, rpc_call_list):
         postdata = json.dumps(list(rpc_call_list))
         self.__conn.request('POST', self.__url.path, postdata,
