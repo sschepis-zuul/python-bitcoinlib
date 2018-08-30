@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-import socket, time, bitcoin
-from bitcoin.messages import msg_version, msg_verack, msg_addr
-from bitcoin.net import CAddress
+import socket, time, gozer
+from gozer.messages import msg_version, msg_verack, msg_addr
+from gozer.net import CAddress
 
 
 PORT = 18333
 
-bitcoin.SelectParams('testnet') 
+gozer.SelectParams('testnet') 
 
 def version_pkt(client_ip, server_ip):
     msg = msg_version()
@@ -59,7 +59,7 @@ s.close()
 # debug log on the server should look like:
 # accepted connection 192.168.0.13:39979
 # send version message: version 70002, blocks=317947, us=****, them=0.0.0.0:0, peer=192.168.0.13:39979
-# receive version message: /pythonbitcoin0.0.1/: version 70002, blocks=-1, us=192.168.0.149:18333, them=192.168.0.13:18333, peer=192.168.0.13:39979
+# receive version message: /pythongozer0.0.1/: version 70002, blocks=-1, us=192.168.0.149:18333, them=192.168.0.13:18333, peer=192.168.0.13:39979
 # Added 2 addresses from 192.168.0.13: 3 tried, 1706 new
 # disconnecting node 192.168.0.13:39979
 

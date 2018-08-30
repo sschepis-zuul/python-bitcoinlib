@@ -1,43 +1,43 @@
-# python-bitcoinlib
+# python-gozerlib
 
-This Python2/3 library provides an easy interface to the bitcoin data
+This Python2/3 library provides an easy interface to the gozer data
 structures and protocol. The approach is low-level and "ground up", with a
-focus on providing tools to manipulate the internals of how Bitcoin works.
+focus on providing tools to manipulate the internals of how Gozer works.
 
-"The Swiss Army Knife of the Bitcoin protocol." - Wladimir J. van der Laan
+"The Swiss Army Knife of the Gozer protocol." - Wladimir J. van der Laan
 
 
 ## Requirements
 
     sudo apt-get install libssl-dev
 
-The RPC interface, bitcoin.rpc, is designed to work with Bitcoin Core v0.13.0
+The RPC interface, gozer.rpc, is designed to work with Gozer Core v0.13.0
 Older versions may work but there do exist some incompatibilities.
 
 
 ## Structure
 
-Everything consensus critical is found in the modules under bitcoin.core. This
+Everything consensus critical is found in the modules under gozer.core. This
 rule is followed pretty strictly, for instance chain parameters are split into
 consensus critical and non-consensus-critical.
 
-    bitcoin.core            - Basic core definitions, datastructures, and
+    gozer.core            - Basic core definitions, datastructures, and
                               (context-independent) validation
-    bitcoin.core.key        - ECC pubkeys
-    bitcoin.core.script     - Scripts and opcodes
-    bitcoin.core.scripteval - Script evaluation/verification
-    bitcoin.core.serialize  - Serialization
+    gozer.core.key        - ECC pubkeys
+    gozer.core.script     - Scripts and opcodes
+    gozer.core.scripteval - Script evaluation/verification
+    gozer.core.serialize  - Serialization
 
-In the future the bitcoin.core may use the Satoshi sourcecode directly as a
+In the future the gozer.core may use the Satoshi sourcecode directly as a
 library. Non-consensus critical modules include the following:
 
-    bitcoin          - Chain selection
-    bitcoin.base58   - Base58 encoding
-    bitcoin.bloom    - Bloom filters (incomplete)
-    bitcoin.net      - Network communication (in flux)
-    bitcoin.messages - Network messages (in flux)
-    bitcoin.rpc      - Bitcoin Core RPC interface support
-    bitcoin.wallet   - Wallet-related code, currently Bitcoin address and
+    gozer          - Chain selection
+    gozer.base58   - Base58 encoding
+    gozer.bloom    - Bloom filters (incomplete)
+    gozer.net      - Network communication (in flux)
+    gozer.messages - Network messages (in flux)
+    gozer.rpc      - Gozer Core RPC interface support
+    gozer.wallet   - Wallet-related code, currently Gozer address and
                        private key support
 
 Effort has been made to follow the Satoshi source relatively closely, for
@@ -48,17 +48,17 @@ CBlockHeader, nValue etc. Otherwise Python naming conventions are followed.
 
 ## Mutable vs. Immutable objects
 
-Like the Bitcoin Core codebase CTransaction is immutable and
-CMutableTransaction is mutable; unlike the Bitcoin Core codebase this
+Like the Gozer Core codebase CTransaction is immutable and
+CMutableTransaction is mutable; unlike the Gozer Core codebase this
 distinction also applies to COutPoint, CTxIn, CTxOut, and CBlock.
 
 
 ## Endianness Gotchas
 
-Rather confusingly Bitcoin Core shows transaction and block hashes as
+Rather confusingly Gozer Core shows transaction and block hashes as
 little-endian hex rather than the big-endian the rest of the world uses for
-SHA256. python-bitcoinlib provides the convenience functions x() and lx() in
-bitcoin.core to convert from big-endian and little-endian hex to raw bytes to
+SHA256. python-gozerlib provides the convenience functions x() and lx() in
+gozer.core to convert from big-endian and little-endian hex to raw bytes to
 accomodate this. In addition see b2x() and b2lx() for conversion from bytes to
 big/little-endian hex.
 
@@ -83,8 +83,8 @@ spending a pay-to-script-hash transaction output:
 
 Do the following:
 
-    import bitcoin
-    bitcoin.SelectParams(NAME)
+    import gozer
+    gozer.SelectParams(NAME)
 
 Where NAME is one of 'testnet', 'mainnet', or 'regtest'. The chain currently
 selected is a global variable that changes behavior everywhere, just like in
@@ -93,7 +93,7 @@ the Satoshi codebase.
 
 ## Unit tests
 
-Under bitcoin/tests using test data from Bitcoin Core. To run them:
+Under gozer/tests using test data from Gozer Core. To run them:
 
     python -m unittest discover && python3 -m unittest discover
 

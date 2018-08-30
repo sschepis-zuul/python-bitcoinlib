@@ -20,13 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# WARNING: Do not run this on a wallet with a non-trivial amount of BTC. This
+# WARNING: Do not run this on a wallet with a non-trivial amount of GZR. This
 # utility has had very little testing and is being published as a
 # proof-of-concept only.
 
-# Requires python-bitcoinlib w/ sendmany support:
+# Requires python-gozerlib w/ sendmany support:
 #
-# https://github.com/petertodd/python-bitcoinlib/commit/6a0a2b9429edea318bea7b65a68a950cae536790
+# https://github.com/petertodd/python-gozerlib/commit/6a0a2b9429edea318bea7b65a68a950cae536790
 
 import sys
 if sys.version_info.major < 3:
@@ -39,10 +39,10 @@ import logging
 import sys
 import os
 
-import bitcoin.rpc
-from bitcoin.core import *
-from bitcoin.core.script import *
-from bitcoin.wallet import *
+import gozer.rpc
+from gozer.core import *
+from gozer.core.script import *
+from gozer.wallet import *
 
 parser = argparse.ArgumentParser(
         description="Publish text in the blockchain, suitably padded for easy recovery with strings",
@@ -87,17 +87,17 @@ elif args.verbosity <= -2:
     logging.root.setLevel(logging.ERROR)
 
 if args.testnet:
-    bitcoin.SelectParams('testnet')
+    gozer.SelectParams('testnet')
 elif args.regtest:
-    bitcoin.SelectParams('regtest')
+    gozer.SelectParams('regtest')
 
-proxy = bitcoin.rpc.Proxy()
+proxy = gozer.rpc.Proxy()
 
 if args.privkey is None:
-    args.privkey = CBitcoinSecret.from_secret_bytes(os.urandom(32))
+    args.privkey = CGozerSecret.from_secret_bytes(os.urandom(32))
 
 else:
-    args.privkey = CBitcoinSecret(args.privkey)
+    args.privkey = CGozerSecret(args.privkey)
 
 logging.info('Using keypair %s %s' % (b2x(args.privkey.pub), args.privkey))
 
@@ -161,7 +161,7 @@ while padded_lines:
 # pay to the redeemScripts to make them spendable
 
 # the 41 accounts for the size of the CTxIn itself
-payments = {P2SHBitcoinAddress.from_redeemScript(redeemScript):int(((len(scriptSig)+41)/1000 * args.fee_per_kb)*COIN)
+payments = {P2SHGozerAddress.from_redeemScript(redeemScript):int(((len(scriptSig)+41)/1000 * args.fee_per_kb)*COIN)
                 for scriptSig, redeemScript in scripts}
 
 prevouts_by_scriptPubKey = None
@@ -178,7 +178,7 @@ else:
     prevouts_by_scriptPubKey = {redeemScript.to_p2sh_scriptPubKey():COutPoint(b'\x00'*32, i)
                                     for i, (scriptSig, redeemScript) in enumerate(scripts)}
     logging.debug('Payments: %r' % payments)
-    logging.info('Total cost: %s BTC' % str_money_value(sum(amount for addr, amount in payments.items())))
+    logging.info('Total cost: %s GZR' % str_money_value(sum(amount for addr, amount in payments.items())))
 
 # Create unsigned tx for SignatureHash
 vout = [CTxOut(0, CScript([OP_RETURN]))]

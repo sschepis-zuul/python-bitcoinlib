@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2014 The python-bitcoinlib developers
+# Copyright (C) 2014 The python-gozerlib developers
 #
-# This file is part of python-bitcoinlib.
+# This file is part of python-gozerlib.
 #
 # It is subject to the license terms in the LICENSE file found in the top-level
 # directory of this distribution.
 #
-# No part of python-bitcoinlib, including this file, may be copied, modified,
+# No part of python-gozerlib, including this file, may be copied, modified,
 # propagated, or distributed except according to the terms contained in the
 # LICENSE file.
 
@@ -19,14 +19,14 @@ if sys.version_info.major < 3:
     sys.exit(1)
 
 import hashlib
-import bitcoin.rpc
+import gozer.rpc
 import sys
 
-from bitcoin import params
-from bitcoin.core import *
-from bitcoin.core.script import *
+from gozer import params
+from gozer.core import *
+from gozer.core.script import *
 
-proxy = bitcoin.rpc.Proxy()
+proxy = gozer.rpc.Proxy()
 
 assert len(sys.argv) > 1
 

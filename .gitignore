@@ -7,5 +7,5 @@ local*.cfg
 .tox/
 build/
 htmlcov/
-python_bitcoinlib.egg-info/
+python_gozerlib.egg-info/
 dist/
