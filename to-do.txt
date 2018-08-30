@@ -1,1 +1,1 @@
-Add raw block data for Gozer in gozer/core/__init_py
+x Add raw block data for Gozer in gozer/core/__init_py
