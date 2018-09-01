@@ -1,1 +1,2 @@
 x Add raw block data for Gozer in gozer/core/__init_py
+modify validations to accept gozer superblocks, calculate coinbase, subsidy and fees etc

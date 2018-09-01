@@ -19,29 +19,38 @@ import gozer.core
 __version__ = '0.7.1-SNAPSHOT'
 
 class MainParams(gozer.core.CoreMainParams):
-    MESSAGE_START = b'\xf9\xbe\xb4\xd9'
+    MESSAGE_START = b'\xfb\xcd\xbe\xdb'
     DEFAULT_PORT = 8888
     RPC_PORT = 8887
     DNS_SEEDS = ()
-    BASE58_PREFIXES = {'PUBKEY_ADDR':76,
+    BASE58_PREFIXES = {'PUBKEY_ADDR':38,
                        'SCRIPT_ADDR':16,
                        'SECRET_KEY' :204}
 
 class TestNetParams(gozer.core.CoreTestNetParams):
-    MESSAGE_START = b'\x0b\x11\x09\x07'
+    MESSAGE_START = b'\xfb\xfa\xdc\xff'
     DEFAULT_PORT = 18888
     RPC_PORT = 18887
     DNS_SEEDS = ()
-    BASE58_PREFIXES = {'PUBKEY_ADDR':140,
+    BASE58_PREFIXES = {'PUBKEY_ADDR':98,
+                       'SCRIPT_ADDR':19,
+                       'SECRET_KEY' :239}
+
+class DevNetParams(gozer.core.CoreDevNetParams):
+    MESSAGE_START = b'\xfb\xac\xfb\xec'
+    DEFAULT_PORT = 18881
+    RPC_PORT = 18880
+    DNS_SEEDS = ()
+    BASE58_PREFIXES = {'PUBKEY_ADDR':98,
                        'SCRIPT_ADDR':19,
                        'SECRET_KEY' :239}
 
 class RegTestParams(gozer.core.CoreRegTestParams):
-    MESSAGE_START = b'\xfa\xbf\xb5\xda'
+    MESSAGE_START = b'\xfb\xcf\xbf\xfc'
     DEFAULT_PORT = 18884
     RPC_PORT = 18883
     DNS_SEEDS = ()
-    BASE58_PREFIXES = {'PUBKEY_ADDR':140,
+    BASE58_PREFIXES = {'PUBKEY_ADDR':98,
                        'SCRIPT_ADDR':19,
                        'SECRET_KEY' :239}
 
