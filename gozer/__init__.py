@@ -75,6 +75,8 @@ def SelectParams(name):
         params = gozer.core.coreparams = MainParams()
     elif name == 'testnet':
         params = gozer.core.coreparams = TestNetParams()
+    elif name == 'devnet':
+        params = gozer.core.coreparams = DevNetParams()
     elif name == 'regtest':
         params = gozer.core.coreparams = RegTestParams()
     else:

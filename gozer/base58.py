@@ -65,6 +65,7 @@ def encode(b):
     return B58_DIGITS[0] * pad + res
 
 def decode(s):
+    print("Address to decode: %s" % s);
     """Decode a base58-encoding string, returning bytes"""
     if not s:
         return b''
