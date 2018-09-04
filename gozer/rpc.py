@@ -507,6 +507,24 @@ class Proxy(BaseProxy):
             r = [lx(txid) for txid in r]
             return r
 
+    def getaddressrawtxs(self, address, verbose=false, start=0, end=9999999999):
+        """Get detailed information about in-wallet transaction txid
+
+        Raises IndexError if transaction not found in the wallet.
+
+        FIXME: Returned data types are not yet converted.
+        """
+        try:
+            postdata = json.dumps({'address': address,
+                                   'verbose': verbose,
+                                   'start': start,
+                                   'end': end})            
+            r = self._call('getaddressrawtxs', postdata)
+        except InvalidAddressOrKeyError as ex:
+            raise IndexError('%s.getaddressrawtxs(): %s (%d)' %
+                    (self.__class__.__name__, ex.error['message'], ex.error['code']))
+        return r
+
     def getrawtransaction(self, txid, verbose=False):
         """Return transaction with hash txid
 
