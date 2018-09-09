@@ -507,7 +507,7 @@ class Proxy(BaseProxy):
             r = [lx(txid) for txid in r]
             return r
 
-    def getaddressrawtxs(self, address, verbose=false, start=0, end=9999999999):
+    def getaddressrawtxs(self, address, verbose=False, start=0, end=9999999999):
         """Get detailed information about in-wallet transaction txid
 
         Raises IndexError if transaction not found in the wallet.
